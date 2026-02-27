@@ -49,6 +49,53 @@
         order by oi.create_date desc
     </select>
 
+    <!-- 下载订单信息 -->
+    <select id="downloadOrder" resultType="java.util.LinkedHashMap">
+        select
+        oi.id,
+        oi.code,
+        oi.owe_code,
+        oi.user_id,
+        oi.total_price,
+        oi.`type`,
+        oi.subsist_price,
+        oi.owe_price,
+        oi.status,
+        oi.address_id,
+        oi.create_date,
+        oi.pay_date,
+        oi.owe_date,
+        ui.name as userName,
+        ui.images,
+        ai.address,
+        ai.contact,
+        ai.phone,
+        li.id as logistics_id
+        from
+        order_info oi
+        left join user_info ui on (ui.id = oi.user_id)
+        left join address_info ai on (ai.id = oi.address_id)
+        left join logistics_info li on (li.order_id = oi.id)
+        where 1 = 1
+        <if test="orderInfo.code != null and orderInfo.code != ''">
+            AND oi.code LIKE CONCAT('%',#{orderInfo.code},'%')
+        </if>
+        <if test="orderInfo.name != null and orderInfo.name != ''">
+            AND ui.name LIKE CONCAT('%',#{orderInfo.name},'%')
+        </if>
+        <if test="orderInfo.address != null and orderInfo.address != ''">
+            AND ai.address LIKE CONCAT('%',#{orderInfo.address},'%')
+        </if>
+        <if test="orderInfo.contact != null and orderInfo.contact != ''">
+            AND ai.contact LIKE CONCAT('%',#{orderInfo.contact},'%')
+        </if>
+        <if test="orderInfo.userId != null and orderInfo.userId != ''">
+            AND ui.user_id = #{orderInfo.userId}
+        </if>
+        group by oi.id
+        order by oi.create_date desc
+    </select>
+
     <!-- 十天内订单数量统计 -->
     <select id="selectOrderNumWithinDays" resultType="java.util.LinkedHashMap">
         SELECT

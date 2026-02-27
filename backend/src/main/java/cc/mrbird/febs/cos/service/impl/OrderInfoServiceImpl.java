@@ -70,6 +70,17 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     /**
+     * 下载订单信息
+     *
+     * @param orderInfo 订单信息
+     * @return 订单信息
+     */
+    @Override
+    public List<LinkedHashMap<String, Object>> downloadOrder(OrderInfo orderInfo) {
+        return null;
+    }
+
+    /**
      * 查询订单详情
      *
      * @param orderId 订单编号

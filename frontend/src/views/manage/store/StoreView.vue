@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="商品出入库记录" @cancel="onClose" :width="1000">
+  <a-modal v-model="show" title="生鲜出入库记录" @cancel="onClose" :width="1000">
     <template slot="footer">
       <a-button key="back" @click="onClose" type="danger">
         关闭
@@ -8,10 +8,10 @@
     <div style="font-size: 13px;font-family: SimHei" v-if="storehouseData !== null">
       <a-row style="padding-left: 24px;padding-right: 24px;">
         <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">基础信息</span></a-col>
-        <a-col :span="8"><b>商品名称：</b>
+        <a-col :span="8"><b>生鲜名称：</b>
           {{ storehouseData.name !== null ? storehouseData.name : '- -' }}
         </a-col>
-        <a-col :span="8"><b>商品型号：</b>
+        <a-col :span="8"><b>生鲜型号：</b>
           {{ storehouseData.model !== null ? storehouseData.model : '- -' }}
         </a-col>
         <a-col :span="8"><b>单位：</b>
@@ -23,7 +23,7 @@
         <a-col :span="8"><b>当前库存：</b>
           {{ storehouseData.num !== null ? storehouseData.num : '- -' }}
         </a-col>
-        <a-col :span="8"><b>商品类型：</b>
+        <a-col :span="8"><b>生鲜类型：</b>
           {{ storehouseData.typeName !== null ? storehouseData.typeName : '- -' }}
         </a-col>
         <a-col :span="8"><b>采购价（元）：</b>
@@ -32,7 +32,7 @@
       </a-row>
       <br/>
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品图片</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜图片</span></a-col>
         <a-col :span="24">
           <a-upload
             name="avatar"

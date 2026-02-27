@@ -7,7 +7,7 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="商品类型"
+                label="生鲜类型"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
@@ -131,7 +131,7 @@ export default {
         title: '类型编号',
         dataIndex: 'code'
       }, {
-        title: '商品类型',
+        title: '生鲜类型',
         dataIndex: 'name'
       }, {
         title: '备注',
@@ -186,7 +186,7 @@ export default {
     },
     handletypeAddSuccess () {
       this.typeAdd.visiable = false
-      this.$message.success('新增商品类型成功')
+      this.$message.success('新增生鲜类型成功')
       this.search()
     },
     edit (record) {

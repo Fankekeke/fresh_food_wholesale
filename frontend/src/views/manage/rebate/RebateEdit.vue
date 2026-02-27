@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="修改商品折扣设置" @cancel="onClose" :width="800">
+  <a-modal v-model="show" title="修改生鲜折扣设置" @cancel="onClose" :width="800">
     <template slot="footer">
       <a-button key="back" @click="onClose">
         取消
@@ -11,18 +11,18 @@
     <a-form :form="form" layout="vertical">
       <a-row :gutter="20">
         <a-col :span="12">
-          <a-form-item label='商品名称' v-bind="formItemLayout">
+          <a-form-item label='生鲜名称' v-bind="formItemLayout">
             <a-input disabled v-decorator="[
             'commodityName',
-            { rules: [{ required: true, message: '请输入商品名称!' }] }
+            { rules: [{ required: true, message: '请输入生鲜名称!' }] }
             ]"/>
           </a-form-item>
         </a-col>
         <a-col :span="12">
-          <a-form-item label='商品型号' v-bind="formItemLayout">
+          <a-form-item label='生鲜型号' v-bind="formItemLayout">
             <a-input disabled v-decorator="[
             'model',
-            { rules: [{ required: true, message: '请输入商品型号!' }] }
+            { rules: [{ required: true, message: '请输入生鲜型号!' }] }
             ]"/>
           </a-form-item>
         </a-col>

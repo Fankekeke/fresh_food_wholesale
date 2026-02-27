@@ -13,6 +13,7 @@
         oi.code as orderCode,
         oi.total_price,
         oi.`type`,
+        oi.`status`,
         ui.name as userName,
         ui.images,
         ai.address,

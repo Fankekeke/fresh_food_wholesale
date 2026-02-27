@@ -1,6 +1,6 @@
 <template>
   <a-drawer
-    title="商品详情"
+    title="生鲜详情"
     :maskClosable="false"
     width=750
     placement="left"
@@ -10,27 +10,27 @@
     style="height: calc(100% - 55px);overflow: auto;padding-bottom: 53px;">
     <div style="font-size: 13px;font-family: SimHei" v-if="commodityData !== null">
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品信息</span></a-col>
-        <a-col :span="8"><b>商品名称：</b>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜信息</span></a-col>
+        <a-col :span="8"><b>生鲜名称：</b>
           {{ commodityData.name }}
         </a-col>
-        <a-col :span="8"><b>商品编号：</b>
+        <a-col :span="8"><b>生鲜编号：</b>
           {{ commodityData.code }}
         </a-col>
-        <a-col :span="8"><b>商品型号：</b>
+        <a-col :span="8"><b>生鲜型号：</b>
           {{ commodityData.model }}
         </a-col>
       </a-row>
       <br/>
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品备注</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜备注</span></a-col>
         <a-col :span="24">
           {{ commodityData.remark }}
         </a-col>
       </a-row>
       <br/>
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品图片</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜图片</span></a-col>
         <a-col :span="24">
           <a-upload
             name="avatar"

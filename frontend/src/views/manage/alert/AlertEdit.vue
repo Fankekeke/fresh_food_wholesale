@@ -11,18 +11,18 @@
     <a-form :form="form" layout="vertical">
       <a-row :gutter="20">
         <a-col :span="8">
-          <a-form-item label='商品编号' v-bind="formItemLayout">
+          <a-form-item label='生鲜编号' v-bind="formItemLayout">
             <a-input disabled v-decorator="[
             'code',
-            { rules: [{ required: true, message: '请输入商品编号!' }] }
+            { rules: [{ required: true, message: '请输入生鲜编号!' }] }
             ]"/>
           </a-form-item>
         </a-col>
         <a-col :span="8">
-          <a-form-item label='商品名称' v-bind="formItemLayout">
+          <a-form-item label='生鲜名称' v-bind="formItemLayout">
             <a-input disabled v-decorator="[
             'commodityName',
-            { rules: [{ required: true, message: '请输入商品名称!' }] }
+            { rules: [{ required: true, message: '请输入生鲜名称!' }] }
             ]"/>
           </a-form-item>
         </a-col>

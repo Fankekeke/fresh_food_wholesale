@@ -53,4 +53,10 @@ public class OrderDetail implements Serializable {
      */
     @TableField(exist = false)
     private CommodityInfo commodity;
+
+    /**
+     * 商品名称
+     */
+    @TableField(exist = false)
+    private String commodityName;
 }

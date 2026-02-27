@@ -74,7 +74,7 @@
         <a-col :span="8"><b>用户名称：</b>
           {{ orderDetailInfo.user.name }}
         </a-col>
-        <a-col :span="8"><b>医院地址：</b>
+        <a-col :span="8"><b>类型：</b>
           <span v-if="orderDetailInfo.user.type == 1">经销商</span>
           <span v-if="orderDetailInfo.user.type == 2">批发商</span>
           <span v-if="orderDetailInfo.user.type == 3">散客</span>
@@ -125,7 +125,7 @@
       <br/>
       <br/>
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">购买商品信息</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">购买生鲜信息</span></a-col>
         <a-col :span="24">
           <a-table :columns="columns" :data-source="orderDetailInfo.detail">
           </a-table>
@@ -188,13 +188,13 @@ export default {
     },
     columns () {
       return [{
-        title: '商品名称',
+        title: '生鲜名称',
         dataIndex: 'commodity.name'
       }, {
         title: '型号',
         dataIndex: 'commodity.model'
       }, {
-        title: '商品图片',
+        title: '生鲜图片',
         dataIndex: 'commodity.images',
         customRender: (text, record, index) => {
           if (!record.commodity.images) return <a-avatar shape="square" icon="user" />

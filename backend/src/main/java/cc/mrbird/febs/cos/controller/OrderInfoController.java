@@ -11,15 +11,23 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 订单管理 控制层
@@ -45,6 +53,8 @@ public class OrderInfoController {
 
     private final IMailService mailService;
 
+    private final ICommodityInfoService commodityInfoService;
+
     /**
      * 分页获取订单信息
      *
@@ -55,6 +65,118 @@ public class OrderInfoController {
     @GetMapping("/page")
     public R page(Page<OrderInfo> page, OrderInfo orderInfo) {
         return R.ok(orderInfoService.selectOrderPage(page, orderInfo));
+    }
+
+    /**
+     * 下载订单信息
+     *
+     * @param orderInfo 订单信息
+     */
+    @GetMapping("/download")
+    public void downloadOrder(HttpServletResponse response, OrderInfo orderInfo) throws IOException {
+        List<LinkedHashMap<String, Object>> result = orderInfoService.downloadOrder(orderInfo);
+        // 设置响应头
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=orders.xlsx");
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("订单信息");
+
+        // 写入表头和数据
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {"订单编号", "用户名称", "创建时间", "订单状态"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+        }
+
+        int rowNum = 1;
+        for (LinkedHashMap<String, Object> rowMap : result) {
+            Row row = sheet.createRow(rowNum++);
+            int colNum = 0;
+            for (Object value : rowMap.values()) {
+                Cell cell = row.createCell(colNum++);
+                if (value instanceof String) {
+                    cell.setCellValue((String) value);
+                } else if (value instanceof Number) {
+                    cell.setCellValue(((Number) value).doubleValue());
+                }
+            }
+        }
+        // 写入响应流
+        workbook.write(response.getOutputStream());
+        workbook.close();
+    }
+
+    @PostMapping("/upload")
+    public R uploadOrder(@RequestParam("file") MultipartFile file) {
+        try {
+            // 1. 解析Excel文件
+            List<OrderDetail> orderDetails = parseExcel(file);
+
+            // 2. 校验数据
+            List<String> errors = validateOrderDetails(orderDetails);
+
+            // 3. 返回校验结果
+            if (!errors.isEmpty()) {
+                return R.error("数据校验失败: " + String.join(", ", errors));
+            }
+
+            return R.ok("上传成功，数据校验通过");
+        } catch (Exception e) {
+            return R.error("文件上传失败: " + e.getMessage());
+        }
+    }
+
+    // 解析Excel文件
+    private List<OrderDetail> parseExcel(MultipartFile file) throws IOException {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        Sheet sheet = workbook.getSheetAt(0);
+
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) { // 跳过表头
+            Row row = sheet.getRow(i);
+            OrderDetail orderDetail = new OrderDetail();
+
+            // 假设Excel列顺序为：商品编码、数量、价格
+            orderDetail.setCommodityName(row.getCell(0).getStringCellValue());
+            orderDetail.setNum((int) row.getCell(1).getNumericCellValue());
+            orderDetail.setPrice(BigDecimal.valueOf(row.getCell(2).getNumericCellValue()));
+
+            orderDetails.add(orderDetail);
+        }
+
+        workbook.close();
+        return orderDetails;
+    }
+
+    // 校验OrderDetail数据
+    private List<String> validateOrderDetails(List<OrderDetail> orderDetails) {
+        List<String> errors = new ArrayList<>();
+
+        List<CommodityInfo> commodityInfoList = commodityInfoService.list();
+        Map<String, String> commodityInfoMap = commodityInfoList.stream().collect(Collectors.toMap(CommodityInfo::getName, CommodityInfo::getCode));
+        for (int i = 0; i < orderDetails.size(); i++) {
+            OrderDetail detail = orderDetails.get(i);
+
+            if (StrUtil.isBlank(detail.getCommodityName())) {
+                errors.add("第" + (i + 1) + "行商品名称不能为空");
+            }
+            if (!commodityInfoMap.containsKey(detail.getCommodityName())) {
+                errors.add("第" + (i + 1) + "行商品名称不存在");
+            } else {
+                detail.setCommodityCode(commodityInfoMap.get(detail.getCommodityName()));
+            }
+
+            if (detail.getNum() <= 0) {
+                errors.add("第" + (i + 1) + "行数量必须大于0");
+            }
+
+            if (detail.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+                errors.add("第" + (i + 1) + "行价格必须大于0");
+            }
+        }
+
+        return errors;
     }
 
     /**

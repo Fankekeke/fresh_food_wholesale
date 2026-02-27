@@ -7,7 +7,7 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="商品名称"
+                label="生鲜名称"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
@@ -15,7 +15,7 @@
             </a-col>
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="商品型号"
+                label="生鲜型号"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.model"/>
@@ -139,11 +139,11 @@ export default {
     }),
     columns () {
       return [{
-        title: '商品名称',
+        title: '生鲜名称',
         dataIndex: 'name',
         ellipsis: true
       }, {
-        title: '商品型号',
+        title: '生鲜型号',
         dataIndex: 'model',
         customRender: (text, row, index) => {
           if (text !== null) {
@@ -164,7 +164,7 @@ export default {
           }
         }
       }, {
-        title: '商品类型',
+        title: '生鲜类型',
         dataIndex: 'typeName',
         customRender: (text, row, index) => {
           if (text !== null) {
@@ -175,7 +175,7 @@ export default {
         },
         ellipsis: true
       }, {
-        title: '商品图片',
+        title: '生鲜图片',
         dataIndex: 'images',
         customRender: (text, record, index) => {
           if (!record.images) return <a-avatar shape="square" icon="user" />

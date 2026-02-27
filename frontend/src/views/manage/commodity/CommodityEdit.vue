@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="修改商品" @cancel="onClose" :width="800">
+  <a-modal v-model="show" title="修改生鲜" @cancel="onClose" :width="800">
     <template slot="footer">
       <a-button key="back" @click="onClose">
         取消
@@ -11,7 +11,7 @@
     <a-form :form="form" layout="vertical">
       <a-row :gutter="20">
         <a-col :span="12">
-          <a-form-item label='商品名称' v-bind="formItemLayout">
+          <a-form-item label='生鲜名称' v-bind="formItemLayout">
             <a-input v-decorator="[
             'name',
             { rules: [{ required: true, message: '请输入名称!' }] }
@@ -19,7 +19,7 @@
           </a-form-item>
         </a-col>
         <a-col :span="12">
-          <a-form-item label='商品类型' v-bind="formItemLayout">
+          <a-form-item label='生鲜类型' v-bind="formItemLayout">
             <a-select v-decorator="[
                   'typeId',
                   { rules: [{ required: true, message: '请输入类型!' }] }

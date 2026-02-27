@@ -89,21 +89,21 @@
         <a-col :span="8">
           <div hoverable :bordered="false" style="width: 100%">
             <a-skeleton active v-if="chartLoading" />
-            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">商品销量排行</p>
+            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">生鲜销量排行</p>
             <apexchart v-if="!chartLoading" type="pie" height="350" :options="chartOptions4" :series="series4"></apexchart>
           </div>
         </a-col>
         <a-col :span="8">
           <div hoverable :bordered="false" style="width: 100%">
             <a-skeleton active v-if="chartLoading" />
-            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">商品销售排行</p>
+            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">生鲜销售排行</p>
             <apexchart v-if="!chartLoading" type="radialBar" height="350" :options="chartOptions5" :series="series5"></apexchart>
           </div>
         </a-col>
         <a-col :span="8">
           <div hoverable :bordered="false" style="width: 100%">
             <a-skeleton active v-if="chartLoading" />
-            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">销售商品分类</p>
+            <p v-if="!chartLoading" style="font-weight: 650;font-size: 15px;margin-bottom: 8px;font-family: SimHei">销售生鲜分类</p>
             <apexchart v-if="!chartLoading" type="pie" height="350" :options="chartOptions6" :series="series6"></apexchart>
           </div>
         </a-col>

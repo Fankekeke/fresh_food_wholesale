@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="商品类型详情" @cancel="onClose" :width="800">
+  <a-modal v-model="show" title="生鲜类型详情" @cancel="onClose" :width="800">
     <template slot="footer">
       <a-button key="back" @click="onClose" type="danger">
         关闭
@@ -7,8 +7,8 @@
     </template>
     <div style="font-size: 13px;font-family: SimHei" v-if="typeData !== null">
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品类型信息</span></a-col>
-        <a-col :span="8"><b>商品类型名称：</b>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜类型信息</span></a-col>
+        <a-col :span="8"><b>生鲜类型名称：</b>
           {{ typeData.name }}
         </a-col>
         <br/>

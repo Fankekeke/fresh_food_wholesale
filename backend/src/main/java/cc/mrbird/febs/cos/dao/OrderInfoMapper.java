@@ -26,6 +26,14 @@ public interface OrderInfoMapper extends BaseMapper<OrderInfo> {
     IPage<LinkedHashMap<String, Object>> selectOrderPage(Page<OrderInfo> page, @Param("orderInfo") OrderInfo orderInfo);
 
     /**
+     * 下载订单信息
+     *
+     * @param orderInfo 订单信息
+     * @return 订单信息
+     */
+    List<LinkedHashMap<String, Object>> downloadOrder(@Param("orderInfo") OrderInfo orderInfo);
+
+    /**
      * 近十天内出入库统计
      *
      * @param type 类型

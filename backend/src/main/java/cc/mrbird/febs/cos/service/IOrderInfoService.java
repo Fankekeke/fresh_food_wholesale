@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * 订单管理 service层
@@ -24,6 +25,14 @@ public interface IOrderInfoService extends IService<OrderInfo> {
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> selectOrderPage(Page<OrderInfo> page, OrderInfo orderInfo);
+
+    /**
+     * 下载订单信息
+     *
+     * @param orderInfo 订单信息
+     * @return 订单信息
+     */
+    List<LinkedHashMap<String, Object>> downloadOrder(OrderInfo orderInfo);
 
     /**
      * 查询订单详情

@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="商品折扣设置详情" @cancel="onClose" :width="1000">
+  <a-modal v-model="show" title="生鲜折扣设置详情" @cancel="onClose" :width="1000">
     <template slot="footer">
       <a-button key="back" @click="onClose" rebate="danger">
         关闭
@@ -7,19 +7,19 @@
     </template>
     <div style="font-size: 13px;font-family: SimHei" v-if="rebateData !== null">
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品信息</span></a-col>
-        <a-col :span="8"><b>商品名称：</b>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜信息</span></a-col>
+        <a-col :span="8"><b>生鲜名称：</b>
           {{ rebateData.commodityName }}
         </a-col>
-        <a-col :span="8"><b>商品型号：</b>
+        <a-col :span="8"><b>生鲜型号：</b>
           {{ rebateData.model }}
         </a-col>
-        <a-col :span="8"><b>商品类型：</b>
+        <a-col :span="8"><b>生鲜类型：</b>
           {{ rebateData.typeName }}
         </a-col>
         <br/>
         <br/>
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">商品图片</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">生鲜图片</span></a-col>
         <a-col :span="24">
           <a-upload
             name="avatar"
@@ -43,7 +43,7 @@
         <a-col :span="8"><b>正常价格：</b>
           {{ rebateData.specialPrice }}
         </a-col>
-        <a-col :span="8"><b>商品类型：</b>
+        <a-col :span="8"><b>生鲜类型：</b>
           {{ rebateData.normalPrice }}
         </a-col>
       </a-row>

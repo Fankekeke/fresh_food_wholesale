@@ -32,7 +32,7 @@
       </a-row>
       <br/>
       <a-row style="padding-left: 24px;padding-right: 24px;">
-        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">入库商品</span></a-col>
+        <a-col style="margin-bottom: 15px"><span style="font-size: 15px;font-weight: 650;color: #000c17">入库生鲜</span></a-col>
         <a-col :span="24">
           <a-table :columns="columns" :data-source="commodityList">
             <template slot="contentShow" slot-scope="text, record">
@@ -84,13 +84,13 @@ export default {
     },
     columns () {
       return [{
-        title: '商品名称',
+        title: '生鲜名称',
         dataIndex: 'name'
       }, {
         title: '型号',
         dataIndex: 'model'
       }, {
-        title: '商品图片',
+        title: '生鲜图片',
         dataIndex: 'images',
         customRender: (text, record, index) => {
           if (!record.images) return <a-avatar shape="square" icon="user" />
