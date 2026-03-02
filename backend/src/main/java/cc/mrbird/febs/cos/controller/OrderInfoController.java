@@ -121,7 +121,7 @@ public class OrderInfoController {
                 return R.error("数据校验失败: " + String.join(", ", errors));
             }
 
-            return R.ok("上传成功，数据校验通过");
+            return R.ok(orderDetails);
         } catch (Exception e) {
             return R.error("文件上传失败: " + e.getMessage());
         }
@@ -279,6 +279,23 @@ public class OrderInfoController {
         if (user != null) {
             orderInfo.setUserId(user.getId());
         }
+        // 订单状态
+        orderInfo.setStatus("0");
+        return R.ok(orderInfoService.orderAdd(orderInfo));
+    }
+
+    /**
+     * 管理员新增订单信息
+     *
+     * @param orderInfo 订单信息
+     * @return 订单信息
+     */
+    @PostMapping("/addOrderByAdmin")
+    public R addOrderByAdmin(OrderInfo orderInfo) throws FebsException {
+        // 订单编号
+        orderInfo.setCode("OD-" + System.currentTimeMillis());
+        // 创建时间
+        orderInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         // 订单状态
         orderInfo.setStatus("0");
         return R.ok(orderInfoService.orderAdd(orderInfo));

@@ -47,7 +47,7 @@
     </div>
     <div>
       <div class="operator">
-        <!--        <a-button type="primary" ghost @click="add">添加订单</a-button>-->
+        <a-button type="primary" ghost @click="openImportDrawer">导入订单</a-button>
         <!--        <a-button @click="batchDelete">删除</a-button>-->
       </div>
       <!-- 表格区域 -->
@@ -87,6 +87,11 @@
       :orderShow="orderView.visiable"
       :orderData="orderView.data">
     </order-view>
+    <order-import
+      @close="handleImportClose"
+      @success="handleImportSuccess"
+      :visible="importDrawer.visible">
+    </order-import>
   </a-card>
 </template>
 
@@ -96,11 +101,12 @@ import {mapState} from 'vuex'
 import moment from 'moment'
 import OrderAudit from './OrderAudit'
 import OrderView from './OrderView'
+import OrderImport from './OrderImport'
 moment.locale('zh-cn')
 
 export default {
   name: 'order',
-  components: {OrderView, OrderAudit, RangeDate},
+  components: {OrderView, OrderAudit, OrderImport, RangeDate},
   data () {
     return {
       advanced: false,
@@ -117,6 +123,9 @@ export default {
       orderStatusView: {
         visiable: false,
         data: null
+      },
+      importDrawer: {
+        visible: false
       },
       queryParams: {},
       filteredInfo: null,
@@ -258,6 +267,20 @@ export default {
     this.fetch()
   },
   methods: {
+    // 打开导入抽屉
+    openImportDrawer() {
+      this.importDrawer.visible = true
+    },
+    // 关闭导入抽屉
+    handleImportClose() {
+      this.importDrawer.visible = false
+    },
+    // 导入成功回调
+    handleImportSuccess() {
+      this.importDrawer.visible = false
+      this.$message.success('订单导入成功')
+      this.fetch()
+    },
     pay (row) {
       if (row.type === '0' && row.status === '0') {
         let data = { outTradeNo: row.code, subject: `${row.code}`, totalAmount: row.totalPrice, body: '' }

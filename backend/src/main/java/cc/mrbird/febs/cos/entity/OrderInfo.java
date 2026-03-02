@@ -113,3 +113,6 @@ public class OrderInfo implements Serializable {
     @TableField(exist = false)
     private String orderDetail;
 }
+
+
+
