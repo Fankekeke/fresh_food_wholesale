@@ -81,9 +81,23 @@ public class OrderInfoController {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("订单信息");
 
+        // oi.code,
+        //        oi.total_price,
+        //        oi.`type`,
+        //        oi.subsist_price,
+        //        oi.owe_price,
+        //        oi.status,
+        //        oi.create_date,
+        //        oi.pay_date,
+        //        oi.owe_date,
+        //        ui.name as userName,
+        //        ai.address,
+        //        ai.contact,
+        //        ai.phone
+
         // 写入表头和数据
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"订单编号", "用户名称", "创建时间", "订单状态"};
+        String[] headers = {"订单编号", "订单价格", "订单类型", "订单状态", "预付款金额", "欠款金额", "订单状态", "订单时间", "下单时间", "尾款支付时间", "用户名称", "收货地址", "联系人", "联系方式"};
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(headers[i]);

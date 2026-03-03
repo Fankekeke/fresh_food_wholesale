@@ -52,25 +52,19 @@
     <!-- 下载订单信息 -->
     <select id="downloadOrder" resultType="java.util.LinkedHashMap">
         select
-        oi.id,
         oi.code,
-        oi.owe_code,
-        oi.user_id,
         oi.total_price,
         oi.`type`,
         oi.subsist_price,
         oi.owe_price,
         oi.status,
-        oi.address_id,
         oi.create_date,
         oi.pay_date,
         oi.owe_date,
         ui.name as userName,
-        ui.images,
         ai.address,
         ai.contact,
-        ai.phone,
-        li.id as logistics_id
+        ai.phone
         from
         order_info oi
         left join user_info ui on (ui.id = oi.user_id)

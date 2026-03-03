@@ -48,6 +48,7 @@
     <div>
       <div class="operator">
         <a-button type="primary" ghost @click="openImportDrawer">导入订单</a-button>
+        <a-button type="primary" ghost @click="exportOrder">导出订单</a-button>
         <!--        <a-button @click="batchDelete">删除</a-button>-->
       </div>
       <!-- 表格区域 -->
@@ -267,6 +268,11 @@ export default {
     this.fetch()
   },
   methods: {
+    // 导出订单
+    exportOrder() {
+      const params = { ...this.queryParams }
+      this.$download('/cos/order-info/download', params, 'orders.xlsx')
+    },
     // 打开导入抽屉
     openImportDrawer() {
       this.importDrawer.visible = true

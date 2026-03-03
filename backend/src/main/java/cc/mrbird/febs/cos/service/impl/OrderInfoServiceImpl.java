@@ -77,7 +77,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
      */
     @Override
     public List<LinkedHashMap<String, Object>> downloadOrder(OrderInfo orderInfo) {
-        return null;
+        return baseMapper.downloadOrder(orderInfo);
     }
 
     /**
